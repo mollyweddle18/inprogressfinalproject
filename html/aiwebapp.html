@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Race Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #game {
+      position: relative;
+      width: 800px;
+      height: 200px;
+      margin: 50px auto;
+      border: 2px solid black;
+      background-color: #f4f4f4;
+      overflow: hidden;
+    }
+    .player {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .head {
+      width: 30px;
+      height: 30px;
+      background-color: #fdd835;
+      border-radius: 50%;
+      margin-bottom: 5px;
+    }
+    .body {
+      width: 20px;
+      height: 40px;
+      background-color: #1976d2;
+    }
+    .legs {
+      display: flex;
+      justify-content: space-between;
+      width: 20px;
+      margin-top: 5px;
+    }
+    .leg {
+      width: 5px;
+      height: 20px;
+      background-color: #d32f2f;
+    }
+    #player1 {
+      left: 0;
+    }
+    #player2 {
+      left: 0;
+      top: 75%;
+    }
+    #message {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+    #restart {
+      display: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    #restart:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Race Game</h1>
+  <p>Player 1: Press <b>A</b> to move forward.</p>
+  <p>Player 2: Press <b>L</b> to move forward.</p>
+  <div id="game">
+    <div id="player1" class="player">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="legs">
+        <div class="leg"></div>
+        <div class="leg"></div>
+      </div>
+    </div>
+    <div id="player2" class="player">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="legs">
+        <div class="leg"></div>
+        <div class="leg"></div>
+      </div>
+    </div>
+  </div>
+  <div id="message">Get ready to race!</div>
+  <button id="restart">Restart</button>
+  <script>
+    const player1 = document.getElementById('player1');
+    const player2 = document.getElementById('player2');
+    const message = document.getElementById('message');
+    const restartButton = document.getElementById('restart');
+    const finishLine = 750; // Position at which the players win
+    let player1Position = 0;
+    let player2Position = 0;
+
+    document.addEventListener('keydown', (event) => {
+      if (player1Position < finishLine && player2Position < finishLine) {
+        if (event.key === 'a' || event.key === 'A') {
+          player1Position += 10;
+          player1.style.left = player1Position + 'px';
+        }
+        if (event.key === 'l' || event.key === 'L') {
+          player2Position += 10;
+          player2.style.left = player2Position + 'px';
+        }
+        checkWinner();
+      }
+    });
+
+    restartButton.addEventListener('click', () => {
+      player1Position = 0;
+      player2Position = 0;
+      player1.style.left = '0px';
+      player2.style.left = '0px';
+      message.textContent = 'Get ready to race!';
+      restartButton.style.display = 'none';
+    });
+
+    function checkWinner() {
+      if (player1Position >= finishLine) {
+        message.textContent = 'Player 1 Wins!';
+        showRestartButton();
+      } else if (player2Position >= finishLine) {
+        message.textContent = 'Player 2 Wins!';
+        showRestartButton();
+      }
+    }
+
+    function showRestartButton() {
+      restartButton.style.display = 'inline-block';
+    }
+  </script>
+</body>
+</html>
