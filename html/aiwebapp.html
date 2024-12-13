@@ -22,43 +22,30 @@
     }
     .player {
       position: absolute;
-      width: 50px;
-      height: 50px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .head {
       width: 30px;
-      height: 30px;
-      background-color: #fdd835;
-      border-radius: 50%;
-      margin-bottom: 5px;
+      height: 60px;
+      border-radius: 10px;
+      background-color: #007bff;
     }
-    .body {
+    .player::before {
+      content: '';
+      position: absolute;
       width: 20px;
-      height: 40px;
-      background-color: #1976d2;
-    }
-    .legs {
-      display: flex;
-      justify-content: space-between;
-      width: 20px;
-      margin-top: 5px;
-    }
-    .leg {
-      width: 5px;
       height: 20px;
-      background-color: #d32f2f;
+      background-color: #ffcc00;
+      border-radius: 50%;
+      top: -25px;
+      left: 5px;
     }
     #player1 {
+      top: 40px;
       left: 0;
+      background-color: #007bff; /* Blue */
     }
     #player2 {
+      top: 120px;
       left: 0;
-      top: 75%;
+      background-color: #28a745; /* Green */
     }
     #message {
       font-size: 20px;
@@ -84,22 +71,8 @@
   <p>Player 1: Press <b>A</b> to move forward.</p>
   <p>Player 2: Press <b>L</b> to move forward.</p>
   <div id="game">
-    <div id="player1" class="player">
-      <div class="head"></div>
-      <div class="body"></div>
-      <div class="legs">
-        <div class="leg"></div>
-        <div class="leg"></div>
-      </div>
-    </div>
-    <div id="player2" class="player">
-      <div class="head"></div>
-      <div class="body"></div>
-      <div class="legs">
-        <div class="leg"></div>
-        <div class="leg"></div>
-      </div>
-    </div>
+    <div id="player1" class="player"></div>
+    <div id="player2" class="player"></div>
   </div>
   <div id="message">Get ready to race!</div>
   <button id="restart">Restart</button>
